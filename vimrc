@@ -173,9 +173,13 @@ let g:syntastic_auto_loc_list=1            " Open/close error window automatical
 let g:syntastic_check_on_open=1            " Syntax check file when opened
 let g:syntastic_check_on_wq=0              " Do not syntax check on :wq
 " Set compiler to use for specific file types:
-let g:sysntastic_h_checkers=['gcc']
-let g:sysntastic_c_checkers=['gcc']
-let g:sysntastic_cpp_checkers=['g++']
+let g:syntastic_c_checkers=['gcc']
+let g:syntastic_c_compiler='gcc'
+let g:syntastic_c_compiler_options=''
+let g:syntastic_cpp_checkers=['g++']
+let g:syntastic_cpp_compiler='g++'
+let g:syntastic_cpp_compiler_options='-std=c++11'
+let g:syntastic_cpp_check_header=1 " check C/C++ header files too
 
 " SuperTab Settings
 "-------------------
@@ -196,6 +200,7 @@ set concealcursor=vin                " Modes to conceal/hide special characters
 let g:clang_snippets=1         " Inserts function parameters at completion
 let g:clang_conceal_snippets=1 " Hide special characters surrounding function parameters
 let g:clang_snippets_engine='clang_complete'
+let g:clang_user_options='-std=c++11'
 
 " UltiSnips Settings
 "--------------------
