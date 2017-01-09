@@ -176,7 +176,7 @@ let g:syntastic_check_on_wq=0              " Do not syntax check on :wq
 let g:syntastic_c_checkers=['gcc']
 let g:syntastic_c_compiler='gcc'
 let g:syntastic_c_compiler_options=''
-let g:syntastic_cpp_checkers=['g++']
+let g:syntastic_cpp_checkers=['gcc']
 let g:syntastic_cpp_compiler='g++'
 let g:syntastic_cpp_compiler_options='-std=c++11'
 let g:syntastic_cpp_check_header=1 " check C/C++ header files too
