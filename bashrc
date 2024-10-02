@@ -119,6 +119,43 @@ fi
 ################################################################################
 # Begin magic
 ################################################################################
+ws()
+{
+    local newWorkspaceDir="${WorkspaceDir:-}"
+
+    if [[ $# -eq 1 ]] ; then
+        newWorkspaceDir="/opt/workspace$1"
+    elif [[ -z "${newWorkspaceDir}" ]] ; then
+        echo "${FUNCNAME[0]} requires a workspace suffix"
+        return 1
+    fi
+
+    if [[ ! -d "${newWorkspaceDir}" ]] ; then
+        echo "${newWorkspaceDir} does not exist"
+        return 1
+    elif ! cd "${newWorkspaceDir}" ; then
+        return 1
+    fi
+
+    export WorkspaceDir="${newWorkspaceDir}"
+    if [[ -f "${WorkspaceDir}/.setup.out" ]] ; then
+        source "${WorkspaceDir}/.setup.out"
+    fi
+
+    IFS=':' read -ra dirs <<< "${PATH}"
+    local newPath=""
+    local d
+    for d in "${dirs[@]}" ; do
+        if [[ -n "${newPath}" ]] ; then
+            newPath="${newPath}:${d}"
+        else
+            newPath="${d}"
+        fi
+    done
+
+    export PATH="${newPath}"
+}
+
 sm()
 {
    local ws
@@ -128,4 +165,3 @@ sm()
    cd ${ws}
    /usr/bin/smerge -n ${ws} >/dev/null 2>&1
 }
-
